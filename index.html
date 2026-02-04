@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+    span.s2 {font: 12.0px 'Lucida Grande'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Content Creation Decision Matrix&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const { useState, useEffect } = React;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Lucide React icons as simple SVG components</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const Download = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const Save = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polyline points="17 21 17 13 7 13 7 21"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polyline points="7 3 7 8 15 8"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const Trash2 = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polyline points="3 6 5 6 21 6"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="10" y1="11" x2="10" y2="17"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="14" y1="11" x2="14" y2="17"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const FileText = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polyline points="14 2 14 8 20 8"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="16" y1="13" x2="8" y2="13"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="16" y1="17" x2="8" y2="17"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;polyline points="10 9 9 9 8 9"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const Plus = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="12" y1="5" x2="12" y2="19"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="5" y1="12" x2="19" y2="12"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const X = ({size = 24}) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="18" y1="6" x2="6" y2="18"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;line x1="6" y1="6" x2="18" y2="18"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ContentMatrix = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const [selections, setSelections] = useState({</p>
+<p class="p1"><span class="Apple-converted-space">            </span>purpose: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>energy: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>format: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hook: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cta: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>production: '',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>distribution: ''</p>
+<p class="p1"><span class="Apple-converted-space">          </span>});</p>
+<p class="p2"><span class="Apple-converted-space">          </span></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const [concept, setConcept] = useState('');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const [generatedPlan, setGeneratedPlan] = useState(null);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const [savedPlans, setSavedPlans] = useState([]);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const [showSaved, setShowSaved] = useState(false);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const menuData = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>purpose: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Content Type (Purpose-Driven)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "education", label: "Education / Explainer", tip: "Break down complex topics into digestible insights" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "insight", label: "Insight / Commentary", tip: "Share your unique perspective on industry trends" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "story", label: "Story / Case Study", tip: "Narrative-driven content showcasing real examples" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "proof", label: "Proof / Results / Wins", tip: "Show tangible outcomes and achievements" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "opinion", label: "Opinion / Take", tip: "Your hot take on current events or practices" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "tutorial", label: "Tutorial / How-To", tip: "Step-by-step guidance on accomplishing something" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "myth", label: "Myth Busting", tip: "Challenge common misconceptions in your field" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "reflection", label: "Reflection / Lesson Learned", tip: "Personal growth moments and takeaways" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "trend", label: "Trend Reaction", tip: "Jump on trending topics with your angle" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "qa", label: "Q&amp;A / AMA", tip: "Answer audience questions directly" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "social-proof", label: "Social Proof", tip: "Showcase testimonials, DMs, or reviews" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "narrative", label: "Narrative Hook", tip: "Cliffhanger or open loop storytelling" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>energy: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Content Type (Energy / Presence)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "silent", label: "Silent Visual", tip: "Pure visual storytelling, no voice needed" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "voice", label: "Voice-Led", tip: "Your voice guides the content" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "text", label: "Text-Led", tip: "On-screen text drives the message" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "mixed", label: "Mixed Media", tip: "Combination of voice, text, and visuals" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "screen", label: "Screen Capture", tip: "Recording your screen for demos or walkthroughs" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "pov", label: "POV", tip: "First-person perspective shots" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "monologue", label: "First-Person Monologue", tip: "Direct-to-camera talking" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>format: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Content Format (Platform Mechanics)",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "short", label: "Short-Form (≤30s)", tip: "Quick, punchy content for maximum reach" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "long", label: "Long-Form", tip: "Deep-dive content for engaged audiences" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "series", label: "Series / Episodic", tip: "Multi-part content that builds anticipation" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "pinned", label: "Pinned Content", tip: "Evergreen content to showcase on your profile" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "remix", label: "Remix / Duet / Stitch", tip: "Build on existing content from others" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "collab", label: "Collab / Guest", tip: "Feature another creator or expert" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "poll", label: "Poll / Interactive", tip: "Engage audience with questions or choices" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>hook: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Hook Style",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "pattern", label: "Pattern Interrupt", tip: "Break scroll with unexpected visuals or actions" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "bold", label: "Bold Claim", tip: "Lead with a controversial or surprising statement" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "question", label: "Question-Led", tip: "Open with a compelling question" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "pain", label: "Relatable Pain", tip: "Start with a problem your audience feels" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "visual", label: "Visual Shock", tip: "Eye-catching imagery in the first frame" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "stat", label: "Statistic-Led", tip: "Lead with a striking number or data point" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "story", label: "Story Cold Open", tip: "Drop into the middle of a narrative" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cta: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "CTA Type",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "soft", label: "Soft CTA (save, reflect)", tip: "Gentle nudge to bookmark or think about it" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "engage", label: "Engage CTA (comment, vote)", tip: "Invite conversation and interaction" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "conversion", label: "Conversion CTA (DM, link)", tip: "Drive direct action outside the platform" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "community", label: "Community CTA (share, tag)", tip: "Encourage spreading the word" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "authority", label: "Authority CTA (follow for X)", tip: "Position yourself as the go-to expert" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>production: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Production Level",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "raw", label: "Raw / Unfiltered", tip: "Authentic, no-editing-needed content" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "semi", label: "Semi-Produced", tip: "Light editing and basic polish" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "full", label: "Fully Produced", tip: "Professional editing with multiple elements" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "one-take", label: "One-Take", tip: "Single continuous shot, minimal editing" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "scripted", label: "Scripted", tip: "Pre-written and rehearsed delivery" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "improv", label: "Improvised", tip: "Off-the-cuff, natural delivery" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>distribution: {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>title: "Distribution Intent",</p>
+<p class="p1"><span class="Apple-converted-space">              </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "reach", label: "Reach", tip: "Maximize views and new audience discovery" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "trust", label: "Trust-Building", tip: "Deepen relationship with existing followers" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "authority", label: "Authority", tip: "Establish expertise and credibility" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "conversion", label: "Conversion", tip: "Drive specific business outcomes" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "community", label: "Community", tip: "Foster connection among your audience" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ value: "retention", label: "Retention", tip: "Keep people watching and coming back" }</p>
+<p class="p1"><span class="Apple-converted-space">              </span>]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>useEffect(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const saved = localStorage.getItem('contentPlans');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (saved) {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>setSavedPlans(JSON.parse(saved));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}, []);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generatePlan = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!concept.trim() || Object.values(selections).some(v =&gt; !v)) {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>alert('Please fill in all selections and your content concept!');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const plan = {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>id: Date.now(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>concept,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>selections,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>timestamp: new Date().toLocaleString(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>content: buildPlanContent()</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>setGeneratedPlan(plan);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const buildPlanContent = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>overview: `Alright, let's break down how you're gonna shoot "${concept}"`,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shotList: generateShotList(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>scriptOutline: generateScriptOutline(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>editingNotes: generateEditingNotes(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption: generateCaption(),</p>
+<p class="p1"><span class="Apple-converted-space">              </span>postingStrategy: generatePostingStrategy()</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generateShotList = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const { energy, format } = selections;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let shots = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>shots.push(`**Opening Shot (Hook):** ${getHookDescription()}`);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (energy === 'pov') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Main Sequence:** POV angles - keep camera at eye level, move naturally');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (energy === 'monologue') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Main Sequence:** Direct to camera - find good lighting, eye contact with lens');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (energy === 'screen') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Main Sequence:** Screen recording - clean desktop, close unnecessary tabs');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (energy === 'silent') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Main Sequence:** Pure visual storytelling - focus on compelling imagery');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Main Sequence:** Mix of angles - wide, medium, close-up for variety');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (format === 'short') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Closing Shot:** Quick payoff within 30 seconds max');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>shots.push('**Closing Shot:** Clear resolution and CTA moment');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return shots;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const getHookDescription = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hooks = {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>pattern: 'Do something unexpected in frame 1 - unusual movement, surprising object, etc.',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>bold: 'Text overlay or you stating your bold claim immediately',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>question: 'On-screen text or verbal question that makes them stop scrolling',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>pain: 'Show the relatable struggle or frustration right away',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>visual: 'Eye-catching visual element front and center',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>stat: 'Big number on screen or stated verbally with impact',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>story: 'Jump right into the middle of action or drama'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return hooks[selections.hook] || 'Strong opening that grabs attention';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generateScriptOutline = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const { purpose, production } = selections;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let outline = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push('**Hook (0-3 seconds):**');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push(`- ${getHookDescription()}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push('**Body:**');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (purpose === 'education') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Point 1: Break down the concept simply');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Point 2: Give an example or analogy');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Point 3: Why it matters to them');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (purpose === 'story') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Setup: Set the scene and context');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Conflict: What went wrong or what challenge came up');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Resolution: How it played out');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (purpose === 'tutorial') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Step 1: [First action]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Step 2: [Second action]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Step 3: [Final action]');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (purpose === 'proof') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Show the result upfront');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Brief context of what led to it');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- The key factor that made it work');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Main point or insight');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Supporting example or evidence');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('- Why your audience should care');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push('**Close:**');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline.push(`- ${getCTADescription()}`);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (production === 'scripted') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('_Write out full script and practice delivery before shooting_');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (production === 'improv') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>outline.push('_Keep these bullet points in mind but riff naturally_');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return outline;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const getCTADescription = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctas = {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>soft: 'Save this for later or drop a <span class="s1">💭</span> if this resonated',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>engage: 'Comment below with [relevant question] or vote in the poll',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>conversion: 'DM me "KEYWORD" or link in bio for more',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>community: 'Tag someone who needs to see this',</p>
+<p class="p1"><span class="Apple-converted-space">              </span>authority: 'Follow for more [your niche] insights like this'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return ctas[selections.cta] || 'End with clear next step';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generateEditingNotes = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const { production, format, energy } = selections;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let notes = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (production === 'raw') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Minimal editing needed - authenticity is key');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Maybe just trim dead air at start/end');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (production === 'semi') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Cut out pauses and mistakes');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Add simple text overlays for key points');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Background music (low volume)');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (production === 'full') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Jump cuts to maintain pace');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Text animations for emphasis');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- B-roll or stock footage inserts');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Sound effects where appropriate');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Color grading for mood');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (format === 'short') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Keep total runtime under 30 seconds');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Fast-paced cuts every 2-3 seconds');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (energy === 'text') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Bold, readable text overlays');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>notes.push('- Consider captions for accessibility');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return notes;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generateCaption = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const { purpose } = selections;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let caption = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push('**Caption Structure:**');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push('');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (purpose === 'myth') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('<span class="s1">❌</span> Myth: [Common belief]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('<span class="s1">✅</span> Reality: [The truth]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('[Brief explanation in 2-3 sentences]');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (purpose === 'story') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('Opening line that teases the story outcome');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('Then unfold it naturally...');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (purpose === 'tutorial') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('Here\'s how to [achieve result]:');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('1. [Step one]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('2. [Step two]');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('3. [Step three]');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('Hook line related to your concept');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>caption.push('Main insight or value in 2-3 sentences');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push(`${getCTADescription()}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>caption.push('**Hashtags:** 3-5 relevant to your niche + trend');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return caption;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const generatePostingStrategy = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const { distribution, format } = selections;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let strategy = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('**Best Time to Post:**');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (distribution === 'reach') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Peak hours for your audience (usually 11am-1pm or 7pm-9pm)');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Test different times and track what works');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- When your core followers are most active');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Consistency matters more than perfect timing');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('**Platform Notes:**');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (format === 'short') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Perfect for TikTok, Reels, Shorts');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Post to all 3 platforms for max reach');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (format === 'long') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- YouTube or long-form platform first');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Cut highlights into shorts for other platforms');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('**Engagement Plan:**');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('- Reply to first 10 comments within the first hour');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>strategy.push('- Pin a comment that drives more discussion');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (distribution === 'community') {</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Reshare user-generated responses');</p>
+<p class="p1"><span class="Apple-converted-space">              </span>strategy.push('- Create a follow-up based on comments');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return strategy;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const savePlan = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!generatedPlan) return;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const updated = [...savedPlans, generatedPlan];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setSavedPlans(updated);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('contentPlans', JSON.stringify(updated));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert('Plan saved!');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const deletePlan = (id) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const updated = savedPlans.filter(p =&gt; p.id !== id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setSavedPlans(updated);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('contentPlans', JSON.stringify(updated));</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const exportPlan = (plan) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const content = formatPlanForExport(plan);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const blob = new Blob([content], { type: 'text/plain' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = URL.createObjectURL(blob);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const a = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.href = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.download = `content-plan-${plan.id}.txt`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>a.click();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const formatPlanForExport = (plan) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let text = `CONTENT CREATION PLAN\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `Generated: ${plan.timestamp}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `\n${'='.repeat(60)}\n\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `CONCEPT: ${plan.concept}\n\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `${'='.repeat(60)}\n\n`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const c = plan.content;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `${c.overview}\n\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `SHOT LIST\n${'-'.repeat(40)}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += c.shotList.join('\n') + '\n\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `SCRIPT OUTLINE\n${'-'.repeat(40)}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += c.scriptOutline.join('\n') + '\n\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `EDITING NOTES\n${'-'.repeat(40)}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += c.editingNotes.join('\n') + '\n\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `CAPTION\n${'-'.repeat(40)}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += c.caption.join('\n') + '\n\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += `POSTING STRATEGY\n${'-'.repeat(40)}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text += c.postingStrategy.join('\n') + '\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return text;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>return (</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;div className="max-w-6xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div className="bg-white rounded-2xl shadow-xl p-8 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;div className="flex justify-between items-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h1 className="text-4xl font-bold text-gray-800"&gt;Content Creation Matrix&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>onClick={() =&gt; setShowSaved(!showSaved)}</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;FileText size={20} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>Saved Plans ({savedPlans.length})</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                  </span>{showSaved ? (</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div className="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 className="text-2xl font-bold text-gray-800"&gt;Your Saved Plans&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>onClick={() =&gt; setShowSaved(false)}</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>className="text-gray-600 hover:text-gray-800"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;X size={24} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>{savedPlans.length === 0 ? (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p className="text-gray-500 text-center py-8"&gt;No saved plans yet. Create one to get started!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>savedPlans.map(plan =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div key={plan.id} className="border rounded-lg p-4 bg-gray-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex justify-between items-start mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h3 className="font-semibold text-lg"&gt;{plan.concept}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p className="text-sm text-gray-500"&gt;{plan.timestamp}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;div className="flex gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>onClick={() =&gt; exportPlan(plan)}</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>className="p-2 text-blue-600 hover:bg-blue-50 rounded"</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>title="Export"</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>&lt;Download size={18} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>onClick={() =&gt; deletePlan(plan.id)}</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>className="p-2 text-red-600 hover:bg-red-50 rounded"</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>title="Delete"</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>&lt;Trash2 size={18} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>onClick={() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>setGeneratedPlan(plan);</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>setShowSaved(false);</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>}}</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>className="text-purple-600 hover:text-purple-700 text-sm font-medium"</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>View Full Plan <span class="s2">→</span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>))</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                  </span>) : (</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="grid md:grid-cols-2 gap-6 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>{Object.entries(menuData).map(([key, data]) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div key={key} className="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;label className="font-semibold text-gray-700 block"&gt;{data.title}&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;select</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>value={selections[key]}</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>onChange={(e) =&gt; setSelections({...selections, [key]: e.target.value})}</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;option value=""&gt;Choose...&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>{data.options.map(opt =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option key={opt.value} value={opt.value}&gt;{opt.label}&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>{selections[key] &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;p className="text-sm text-gray-600 italic"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span><span class="s1">💡</span> {data.options.find(o =&gt; o.value === selections[key])?.tip}</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>)}</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;div className="mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label className="font-semibold text-gray-700 block mb-2"&gt;Your Content Concept&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;textarea</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>value={concept}</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>onChange={(e) =&gt; setConcept(e.target.value)}</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>placeholder="Describe your content idea here... (e.g., '3 mistakes I made as a beginner content creator')"</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent h-24"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onClick={generatePlan}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition flex items-center justify-center gap-2"</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;Plus size={24} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Generate My Shooting Plan</p>
+<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/button&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                      </span>{generatedPlan &amp;&amp; (</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div className="mt-8 border-t pt-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div className="flex justify-between items-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 className="text-3xl font-bold text-gray-800"&gt;Your Shooting Plan&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div className="flex gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>onClick={savePlan}</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;Save size={20} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Save Plan</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;button</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>onClick={() =&gt; exportPlan(generatedPlan)}</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;Download size={20} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Export</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div className="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 className="text-xl font-semibold mb-2"&gt;"{generatedPlan.concept}"&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p className="text-gray-700"&gt;{generatedPlan.content.overview}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                          </span>&lt;div className="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;h3 className="text-2xl font-bold text-gray-800 mb-3"&gt;<span class="s1">📹</span> Shot List&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;div className="bg-gray-50 p-4 rounded-lg space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>{generatedPlan.content.shotList.map((shot, i) =&gt; (</p>
+<p class="p1"><span class="Apple-converted-space">                                  </span>&lt;p key={i} className="text-gray-700" dangerouslySetInnerHTML={{__html: shot.replace(/\*\*(.*?)\*\*/g, '&lt;strong&gt;$1&lt;/strong&gt;')}} /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>))}</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                              </span>&lt;h3 className="text-2xl font-bold text-gray-800 mb-3"&gt;<span class="s1">📝</span> Script Outline</p>
+</body>
+</html>
