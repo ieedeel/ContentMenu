@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creation Decision Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen p-4">
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">Content Creation Matrix</h1>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Content Type (Purpose-Driven)</label>
+                    <select id="purpose" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="education">Education / Explainer</option>
+                        <option value="insight">Insight / Commentary</option>
+                        <option value="story">Story / Case Study</option>
+                        <option value="proof">Proof / Results / Wins</option>
+                        <option value="opinion">Opinion / Take</option>
+                        <option value="tutorial">Tutorial / How-To</option>
+                        <option value="myth">Myth Busting</option>
+                        <option value="reflection">Reflection / Lesson Learned</option>
+                        <option value="trend">Trend Reaction</option>
+                        <option value="qa">Q&A / AMA</option>
+                        <option value="social-proof">Social Proof</option>
+                        <option value="narrative">Narrative Hook</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Content Type (Energy / Presence)</label>
+                    <select id="energy" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="silent">Silent Visual</option>
+                        <option value="voice">Voice-Led</option>
+                        <option value="text">Text-Led</option>
+                        <option value="mixed">Mixed Media</option>
+                        <option value="screen">Screen Capture</option>
+                        <option value="pov">POV</option>
+                        <option value="monologue">First-Person Monologue</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Content Format</label>
+                    <select id="format" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="short">Short-Form (≤30s)</option>
+                        <option value="long">Long-Form</option>
+                        <option value="series">Series / Episodic</option>
+                        <option value="pinned">Pinned Content</option>
+                        <option value="remix">Remix / Duet / Stitch</option>
+                        <option value="collab">Collab / Guest</option>
+                        <option value="poll">Poll / Interactive</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Hook Style</label>
+                    <select id="hook" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="pattern">Pattern Interrupt</option>
+                        <option value="bold">Bold Claim</option>
+                        <option value="question">Question-Led</option>
+                        <option value="pain">Relatable Pain</option>
+                        <option value="visual">Visual Shock</option>
+                        <option value="stat">Statistic-Led</option>
+                        <option value="story">Story Cold Open</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">CTA Type</label>
+                    <select id="cta" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="soft">Soft CTA (save, reflect)</option>
+                        <option value="engage">Engage CTA (comment, vote)</option>
+                        <option value="conversion">Conversion CTA (DM, link)</option>
+                        <option value="community">Community CTA (share, tag)</option>
+                        <option value="authority">Authority CTA (follow for X)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Production Level</label>
+                    <select id="production" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="raw">Raw / Unfiltered</option>
+                        <option value="semi">Semi-Produced</option>
+                        <option value="full">Fully Produced</option>
+                        <option value="one-take">One-Take</option>
+                        <option value="scripted">Scripted</option>
+                        <option value="improv">Improvised</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700 block mb-2">Distribution Intent</label>
+                    <select id="distribution" class="w-full p-3 border rounded-lg">
+                        <option value="">Choose...</option>
+                        <option value="reach">Reach</option>
+                        <option value="trust">Trust-Building</option>
+                        <option value="authority">Authority</option>
+                        <option value="conversion">Conversion</option>
+                        <option value="community">Community</option>
+                        <option value="retention">Retention</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="font-semibold text-gray-700 block mb-2">Your Content Concept</label>
+                <textarea id="concept" placeholder="Describe your content idea here..." class="w-full p-4 border rounded-lg h-24"></textarea>
+            </div>
+
+            <button onclick="generatePlan()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700">
+                Generate My Shooting Plan
+            </button>
+
+            <div id="result" class="mt-8 hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        function generatePlan() {
+            const purpose = document.getElementById('purpose').value;
+            const energy = document.getElementById('energy').value;
+            const format = document.getElementById('format').value;
+            const hook = document.getElementById('hook').value;
+            const cta = document.getElementById('cta').value;
+            const production = document.getElementById('production').value;
+            const distribution = document.getElementById('distribution').value;
+            const concept = document.getElementById('concept').value;
+
+            if (!purpose || !energy || !format || !hook || !cta || !production || !distribution || !concept) {
+                alert('Please fill in all selections and your content concept!');
+                return;
+            }
+
+            const plan = `
+                <div class="border-t pt-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Your Shooting Plan</h2>
+                    
+                    <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold mb-2">"${concept}"</h3>
+                        <p class="text-gray-700">Alright, let's break down how you're gonna shoot this!</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <section class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">📹 Shot List</h3>
+                            <p><strong>Opening Shot (Hook):</strong> ${getHookDesc(hook)}</p>
+                            <p><strong>Main Sequence:</strong> ${getEnergyDesc(energy)}</p>
+                            <p><strong>Closing Shot:</strong> ${format === 'short' ? 'Quick payoff within 30 seconds max' : 'Clear resolution and CTA moment'}</p>
+                        </section>
+
+                        <section class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">📝 Script Outline</h3>
+                            <p><strong>Hook (0-3 seconds):</strong> ${getHookDesc(hook)}</p>
+                            <p><strong>Body:</strong> ${getPurposeDesc(purpose)}</p>
+                            <p><strong>Close:</strong> ${getCTADesc(cta)}</p>
+                        </section>
+
+                        <section class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">✂️ Editing Notes</h3>
+                            ${getEditingNotes(production, format)}
+                        </section>
+
+                        <section class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">💬 Caption</h3>
+                            <p>${getCaptionStructure(purpose)}</p>
+                            <p class="mt-2">${getCTADesc(cta)}</p>
+                            <p class="mt-2"><strong>Hashtags:</strong> 3-5 relevant to your niche + trend</p>
+                        </section>
+
+                        <section class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">🚀 Posting Strategy</h3>
+                            ${getPostingStrategy(distribution, format)}
+                        </section>
+                    </div>
+
+                    <button onclick="exportPlan()" class="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+                        Export Plan as Text
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('result').innerHTML = plan;
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        function getHookDesc(hook) {
+            const hooks = {
+                pattern: 'Do something unexpected in frame 1',
+                bold: 'Text overlay or you stating your bold claim immediately',
+                question: 'On-screen text or verbal question that makes them stop scrolling',
+                pain: 'Show the relatable struggle or frustration right away',
+                visual: 'Eye-catching visual element front and center',
+                stat: 'Big number on screen or stated verbally with impact',
+                story: 'Jump right into the middle of action or drama'
+            };
+            return hooks[hook] || 'Strong opening';
+        }
+
+        function getEnergyDesc(energy) {
+            const energies = {
+                pov: 'POV angles - keep camera at eye level, move naturally',
+                monologue: 'Direct to camera - find good lighting, eye contact with lens',
+                screen: 'Screen recording - clean desktop, close unnecessary tabs',
+                silent: 'Pure visual storytelling - focus on compelling imagery',
+                voice: 'Voice-over with supporting visuals',
+                text: 'Text overlays driving the narrative',
+                mixed: 'Mix of angles - wide, medium, close-up for variety'
+            };
+            return energies[energy] || 'Mix of angles for variety';
+        }
+
+        function getPurposeDesc(purpose) {
+            const purposes = {
+                education: 'Break down the concept → Give an example → Why it matters',
+                story: 'Setup the scene → Conflict/challenge → Resolution',
+                tutorial: 'Step 1 → Step 2 → Step 3',
+                proof: 'Show the result → Brief context → Key factor that made it work'
+            };
+            return purposes[purpose] || 'Main point → Supporting example → Why they should care';
+        }
+
+        function getCTADesc(cta) {
+            const ctas = {
+                soft: 'Save this for later or drop a 💭 if this resonated',
+                engage: 'Comment below with your thoughts or vote in the poll',
+                conversion: 'DM me or link in bio for more',
+                community: 'Tag someone who needs to see this',
+                authority: 'Follow for more insights like this'
+            };
+            return ctas[cta] || 'End with clear next step';
+        }
+
+        function getEditingNotes(production, format) {
+            let notes = '';
+            if (production === 'raw') {
+                notes = '<p>Minimal editing needed - authenticity is key</p><p>Maybe just trim dead air at start/end</p>';
+            } else if (production === 'semi') {
+                notes = '<p>Cut out pauses and mistakes</p><p>Add simple text overlays for key points</p><p>Background music (low volume)</p>';
+            } else if (production === 'full') {
+                notes = '<p>Jump cuts to maintain pace</p><p>Text animations for emphasis</p><p>B-roll inserts</p><p>Sound effects where appropriate</p>';
+            }
+            if (format === 'short') {
+                notes += '<p>Keep total runtime under 30 seconds</p><p>Fast-paced cuts every 2-3 seconds</p>';
+            }
+            return notes;
+        }
+
+        function getCaptionStructure(purpose) {
+            if (purpose === 'myth') {
+                return '❌ Myth: [Common belief]<br>✅ Reality: [The truth]<br>[Brief explanation]';
+            } else if (purpose === 'tutorial') {
+                return 'Here\'s how to [achieve result]:<br>1. Step one<br>2. Step two<br>3. Step three';
+            }
+            return 'Hook line related to your concept<br>Main insight in 2-3 sentences';
+        }
+
+        function getPostingStrategy(distribution, format) {
+            let strategy = '<p><strong>Best Time:</strong> ';
+            if (distribution === 'reach') {
+                strategy += 'Peak hours (11am-1pm or 7pm-9pm)</p>';
+            } else {
+                strategy += 'When your core followers are most active</p>';
+            }
+            
+            strategy += '<p><strong>Platform:</strong> ';
+            if (format === 'short') {
+                strategy += 'Perfect for TikTok, Reels, Shorts - post to all 3</p>';
+            } else {
+                strategy += 'YouTube first, then cut highlights for shorts</p>';
+            }
+            
+            strategy += '<p><strong>Engagement:</strong> Reply to first 10 comments within the first hour</p>';
+            return strategy;
+        }
+
+        function exportPlan() {
+            const concept = document.getElementById('concept').value;
+            const resultText = document.getElementById('result').innerText;
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `content-plan-${Date.now()}.txt`;
+            a.click();
+        }
+    </script>
+</body>
+</html>
