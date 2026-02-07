@@ -211,13 +211,48 @@
 
         function getHookTalkingPoints(hook, concept) {
             const points = {
-                pattern: [`Start with action, not setup`, `No intro - jump right in`, `Example: [Dramatic action related to "${concept}"]`],
-                bold: [`State your bold claim immediately`, `Example: "Here's the truth about ${concept}"`, `No "Hey guys" - just the claim`],
-                question: [`Ask the question that relates to your concept`, `Example: "Want to know the biggest mistake in ${concept}?"`, `Make it relatable to your audience`],
-                pain: [`State the pain/problem upfront`, `Example: "If you're struggling with [problem in ${concept}]..."`, `Make them feel seen immediately`],
-                visual: [`Let the visual do the talking`, `Minimal or no talking in first 2 seconds`, `Visual tells the story`],
-                stat: [`Lead with the shocking number`, `Example: "95% of people get this wrong about ${concept}"`, `Number first, context second`],
-                story: [`Drop into the middle of the story`, `Example: "So there I was, completely messing up ${concept}..."`, `Create instant curiosity`]
+                pattern: [
+                    `Start with action, not setup - no intro needed`,
+                    `💡 IDEA: Do something unexpected that relates to "${concept}"`,
+                    `Example for your concept: Start mid-action, like showing the mistake happening in real-time`,
+                    `OR: Use a prop/visual that makes people stop scrolling`
+                ],
+                bold: [
+                    `State your bold claim about "${concept}" immediately`,
+                    `💡 IDEA: "Most people are wrong about [key aspect of your concept]"`,
+                    `Example for your concept: Challenge a common belief or reveal a controversial truth`,
+                    `No fluff - just drop the bomb in the first 2 seconds`
+                ],
+                question: [
+                    `Ask a question that makes them curious about "${concept}"`,
+                    `💡 IDEA: "Ever wonder why [problem from your concept] happens?"`,
+                    `Example for your concept: Turn your main point into a question they NEED answered`,
+                    `Make it specific enough that they know it's for them`
+                ],
+                pain: [
+                    `Call out the pain point in "${concept}" immediately`,
+                    `💡 IDEA: "If you've ever felt [frustration from your concept]..."`,
+                    `Example for your concept: Describe the struggle they're experiencing right now`,
+                    `Make them nod and think "YES, that's exactly my problem!"`
+                ],
+                visual: [
+                    `Let the visual tell the story about "${concept}"`,
+                    `💡 IDEA: Show the before/after, the mistake, or the result visually first`,
+                    `Example for your concept: Open with a visual that instantly communicates your message`,
+                    `Add text overlay or voice after 2-3 seconds`
+                ],
+                stat: [
+                    `Lead with a shocking number related to "${concept}"`,
+                    `💡 IDEA: "[X]% of people make this mistake" or "I lost [number] doing this"`,
+                    `Example for your concept: Find the surprising stat or personal number in your story`,
+                    `Big number on screen, then explain what it means`
+                ],
+                story: [
+                    `Drop into the middle of your "${concept}" story`,
+                    `💡 IDEA: "So there I was, [critical moment from your concept]..."`,
+                    `Example for your concept: Start at the peak moment of tension or surprise`,
+                    `Create instant curiosity - they'll want to know what happened`
+                ]
             };
             return points[hook] || [`Strong opening statement`, `Hook them in 3 seconds`, `Related to: ${concept}`];
         }
@@ -230,23 +265,41 @@
                     duration: isShort ? '3-6 sec' : '5-10 sec',
                     title: 'POINT 1 - The Problem',
                     shot: energy === 'screen' ? 'Screen recording showing the issue' : 'Medium shot - explaining the concept',
-                    talkingPoints: [`Break down what the problem is`, `Keep it simple and clear`, `Example: "Here's what most people don't understand about ${concept}"`],
-                    notes: 'Focus on ONE key concept'
+                    talkingPoints: [
+                        `Explain what the problem is in "${concept}"`,
+                        `💡 IDEA: Break down the most common misunderstanding or mistake`,
+                        `Example for your concept: "Here's what most people miss about [aspect of your concept]"`,
+                        `Keep it simple - focus on ONE key problem`,
+                        `Use an analogy if it helps clarify (like comparing it to everyday things)`
+                    ],
+                    notes: 'Focus on ONE key concept - don\'t try to teach everything at once'
                 });
                 bodyFrames.push({
                     duration: isShort ? '4-7 sec' : '8-15 sec',
                     title: 'POINT 2 - The Solution',
                     shot: 'Close-up OR B-roll showing the solution',
-                    talkingPoints: [`Give them the answer/insight`, `Use an analogy if helpful`, `Example: "Think of it like [simple comparison]"`],
-                    notes: 'Make it actionable'
+                    talkingPoints: [
+                        `Give them the answer to the problem in "${concept}"`,
+                        `💡 IDEA: Share the exact method/approach that works`,
+                        `Example for your concept: "Instead of [wrong way], try [right way]"`,
+                        `Make it actionable - they should know what to do differently`,
+                        `Optional: Share a quick win they can implement today`
+                    ],
+                    notes: 'Make it actionable - give them something they can actually use'
                 });
                 if (!isShort) {
                     bodyFrames.push({
                         duration: '10-15 sec',
                         title: 'POINT 3 - Why It Matters',
                         shot: 'Medium shot - direct to camera',
-                        talkingPoints: [`Connect it to their results`, `Show the impact`, `Example: "This is why it matters for ${concept}"`],
-                        notes: 'Emotional connection here'
+                        talkingPoints: [
+                            `Connect the solution to real results from "${concept}"`,
+                            `💡 IDEA: "This is why understanding [your point] changes everything"`,
+                            `Example for your concept: Share what happened when you/others applied this`,
+                            `Paint the picture of the transformation or outcome`,
+                            `Make them feel the impact emotionally`
+                        ],
+                        notes: 'Emotional connection here - make them FEEL why this matters'
                     });
                 }
             } else if (purpose === 'story') {
@@ -254,23 +307,41 @@
                     duration: isShort ? '5-8 sec' : '8-12 sec',
                     title: 'SETUP',
                     shot: energy === 'pov' ? 'POV showing the scene' : 'Wide shot establishing the context',
-                    talkingPoints: [`Set the scene briefly`, `Who, what, when`, `Example: "I was trying to [action related to ${concept}]"`],
-                    notes: 'Keep setup BRIEF'
+                    talkingPoints: [
+                        `Set the scene for "${concept}" - who, what, when`,
+                        `💡 IDEA: "I was in [situation] trying to [goal related to your concept]"`,
+                        `Example for your concept: Establish the context quickly without over-explaining`,
+                        `Keep setup BRIEF - just enough for them to understand the situation`,
+                        `Hint at what's about to go wrong to build anticipation`
+                    ],
+                    notes: 'Keep setup BRIEF - get to the good stuff fast'
                 });
                 bodyFrames.push({
                     duration: isShort ? '6-10 sec' : '10-18 sec',
                     title: 'CONFLICT',
                     shot: 'Close-up showing emotion OR action shots',
-                    talkingPoints: [`What went wrong`, `The challenge or mistake`, `Build tension`],
-                    notes: 'This is your drama moment'
+                    talkingPoints: [
+                        `What went wrong with "${concept}"`,
+                        `💡 IDEA: "Then [unexpected thing] happened..." or "I made the mistake of [action]"`,
+                        `Example for your concept: Show the turning point, the obstacle, or the failure`,
+                        `Build tension - make them lean in to see what happens`,
+                        `Be specific about the struggle or challenge you faced`
+                    ],
+                    notes: 'This is your drama moment - don\'t rush through it'
                 });
                 if (!isShort) {
                     bodyFrames.push({
                         duration: '12-18 sec',
                         title: 'RESOLUTION',
                         shot: 'Medium shot - showing outcome',
-                        talkingPoints: [`How it turned out`, `What you learned`, `The payoff`],
-                        notes: 'Tie it back to your concept'
+                        talkingPoints: [
+                            `How the situation with "${concept}" turned out`,
+                            `💡 IDEA: "Here's what I learned..." or "This is how it ended..."`,
+                            `Example for your concept: Share the lesson, the pivot, or the outcome`,
+                            `Connect the resolution back to why it matters to your audience`,
+                            `End with the insight they can take away`
+                        ],
+                        notes: 'Tie it back to your concept - make the lesson clear'
                     });
                 }
             } else if (purpose === 'tutorial') {
@@ -278,23 +349,41 @@
                     duration: isShort ? '4-7 sec' : '6-10 sec',
                     title: 'STEP 1',
                     shot: energy === 'screen' ? 'Screen recording of step 1' : 'Close-up showing step 1',
-                    talkingPoints: [`"First, you need to [action]"`, `Show exactly what to do`, `Keep it crystal clear`],
-                    notes: 'One step only - no rushing'
+                    talkingPoints: [
+                        `"First step for ${concept}: [action]"`,
+                        `💡 IDEA: Break down the very first thing they need to do`,
+                        `Example for your concept: "Start by [specific action]" - be super clear`,
+                        `Show exactly what to do, don't assume they know`,
+                        `Call out common mistakes to avoid at this step`
+                    ],
+                    notes: 'One step only - no rushing. Make it foolproof.'
                 });
                 bodyFrames.push({
                     duration: isShort ? '4-7 sec' : '6-10 sec',
                     title: 'STEP 2',
                     shot: energy === 'screen' ? 'Screen recording of step 2' : 'Close-up showing step 2',
-                    talkingPoints: [`"Next, [action]"`, `Show the progression`, `Highlight any common mistakes to avoid`],
-                    notes: 'Build on previous step'
+                    talkingPoints: [
+                        `"Next, you need to [action for step 2]"`,
+                        `💡 IDEA: Build on step 1 - show the progression`,
+                        `Example for your concept: Explain how this step connects to the first one`,
+                        `Highlight what success looks like at this stage`,
+                        `Quick tip: Share a pro move or shortcut if you have one`
+                    ],
+                    notes: 'Build on previous step - show clear progression'
                 });
                 if (!isShort) {
                     bodyFrames.push({
                         duration: '6-10 sec',
                         title: 'STEP 3',
                         shot: 'Showing final step OR result',
-                        talkingPoints: [`"Finally, [action]"`, `Show the complete process`, `Quick tip or pro move`],
-                        notes: 'Lead into the result'
+                        talkingPoints: [
+                            `"Finally, [action for final step]"`,
+                            `💡 IDEA: Complete the process - show them crossing the finish line`,
+                            `Example for your concept: "Once you do this, you should see [result]"`,
+                            `Show what the end result looks like`,
+                            `Give them a way to verify they did it right`
+                        ],
+                        notes: 'Lead into the result - make them feel accomplished'
                     });
                 }
             } else if (purpose === 'proof') {
@@ -302,23 +391,41 @@
                     duration: isShort ? '4-8 sec' : '6-12 sec',
                     title: 'THE RESULT',
                     shot: 'Close-up of proof (screenshot, before/after, data)',
-                    talkingPoints: [`Show the result upfront`, `Numbers, visuals, tangible proof`, `"Here's what happened..."`],
-                    notes: 'Make it undeniable'
+                    talkingPoints: [
+                        `Show the result from "${concept}" upfront - don't bury it`,
+                        `💡 IDEA: "Here's what happened: [specific numbers/outcomes]"`,
+                        `Example for your concept: Lead with the proof - screenshot, data, before/after`,
+                        `Make it visual and undeniable - show, don't just tell`,
+                        `Numbers and specifics build credibility`
+                    ],
+                    notes: 'Make it undeniable - concrete proof beats vague claims'
                 });
                 bodyFrames.push({
                     duration: isShort ? '5-8 sec' : '8-15 sec',
                     title: 'THE CONTEXT',
                     shot: 'Medium shot explaining',
-                    talkingPoints: [`Brief backstory`, `What you did to get this result`, `Key factor that made it work`],
-                    notes: 'Keep context tight'
+                    talkingPoints: [
+                        `Brief backstory of "${concept}" - how you got this result`,
+                        `💡 IDEA: "I did [key action] which led to [result]"`,
+                        `Example for your concept: What was the ONE thing that made the difference?`,
+                        `Keep context tight - focus on the key factor, not every detail`,
+                        `Make it relatable so they can see themselves doing it`
+                    ],
+                    notes: 'Keep context tight - focus on the key factor that worked'
                 });
                 if (!isShort) {
                     bodyFrames.push({
                         duration: '8-12 sec',
                         title: 'THE INSIGHT',
                         shot: 'Direct to camera',
-                        talkingPoints: [`What you learned`, `Why it worked`, `What others can learn from this`],
-                        notes: 'Value-add moment'
+                        talkingPoints: [
+                            `Share the big lesson from "${concept}"`,
+                            `💡 IDEA: "Here's what I learned that changed everything..."`,
+                            `Example for your concept: What's the transferable insight others can use?`,
+                            `Connect your win to their potential win`,
+                            `Make it bigger than just your story - how can THEY apply this?`
+                        ],
+                        notes: 'Value-add moment - make it about them, not just you'
                     });
                 }
             } else {
@@ -327,23 +434,41 @@
                     duration: isShort ? '5-10 sec' : '8-15 sec',
                     title: 'MAIN POINT',
                     shot: energy === 'monologue' ? 'Medium shot - talking to camera' : 'Mix of shots showing your point',
-                    talkingPoints: [`Your main insight about ${concept}`, `Support it with example or evidence`, `Make it relatable`],
-                    notes: 'This is your core message'
+                    talkingPoints: [
+                        `Share your main insight about "${concept}"`,
+                        `💡 IDEA: "The thing people don't realize about [your concept] is..."`,
+                        `Example for your concept: What's the core message you want them to remember?`,
+                        `Support it with a specific example or personal story`,
+                        `Make it relatable - connect it to their experience`
+                    ],
+                    notes: 'This is your core message - make it memorable'
                 });
                 if (!isShort) {
                     bodyFrames.push({
                         duration: '10-15 sec',
                         title: 'SUPPORTING POINT',
                         shot: 'B-roll OR close-up',
-                        talkingPoints: [`Expand on your main idea`, `Give another angle or example`, `Build credibility`],
-                        notes: 'Reinforce your message'
+                        talkingPoints: [
+                            `Expand on your main idea about "${concept}"`,
+                            `💡 IDEA: Give another angle, example, or piece of evidence`,
+                            `Example for your concept: "Here's another way to think about it..."`,
+                            `Build credibility - share data, expert opinion, or your experience`,
+                            `Strengthen your argument without being repetitive`
+                        ],
+                        notes: 'Reinforce your message from a different angle'
                     });
                     bodyFrames.push({
                         duration: '8-12 sec',
                         title: 'WHY IT MATTERS',
                         shot: 'Direct to camera',
-                        talkingPoints: [`Connect to their life/goals`, `Show the impact`, `Make it personal`],
-                        notes: 'Emotional resonance'
+                        talkingPoints: [
+                            `Connect "${concept}" to their life/goals`,
+                            `💡 IDEA: "This matters because [impact on their results/life]"`,
+                            `Example for your concept: Paint the picture of what changes when they apply this`,
+                            `Make it personal - what will be different for them?`,
+                            `Create emotional resonance - help them FEEL the impact`
+                        ],
+                        notes: 'Emotional resonance - make them care deeply'
                     });
                 }
             }
@@ -364,11 +489,41 @@
 
         function getClosingTalkingPoints(cta, concept) {
             const ctaPoints = {
-                soft: [`"Save this for later if you found it helpful"`, `Optional: quick recap of main point`, `Keep it gentle - no pressure`],
-                engage: [`"Drop a comment with [specific question]"`, `"What's your experience with ${concept}?"`, `Invite conversation`],
-                conversion: [`"DM me [KEYWORD] for the full guide"`, `OR "Link in bio for more on ${concept}"`, `Clear, specific instruction`],
-                community: [`"Tag someone who needs to hear this"`, `"Share this with your [target audience]"`, `Make it about spreading value`],
-                authority: [`"Follow for more tips on ${concept}"`, `Position yourself as the expert`, `Hint at future content`]
+                soft: [
+                    `"If this helped you understand ${concept}, save it for later"`,
+                    `💡 IDEA: Keep it gentle - no pressure, just value`,
+                    `Example for your concept: "Drop a 💭 if this resonated with you"`,
+                    `Optional: Quick one-sentence recap of the main takeaway`,
+                    `Leave them with something to think about`
+                ],
+                engage: [
+                    `"Now I want to hear from you about ${concept}"`,
+                    `💡 IDEA: Ask a specific question that sparks discussion`,
+                    `Example for your concept: "What's YOUR experience with [aspect of concept]?"`,
+                    `Make it easy to answer - specific beats vague`,
+                    `Consider: "Comment A or B" style questions for easy engagement`
+                ],
+                conversion: [
+                    `"Want more on ${concept}? Here's what to do"`,
+                    `💡 IDEA: Give crystal clear instructions`,
+                    `Example for your concept: "DM me [KEYWORD]" or "Link in bio for the full guide"`,
+                    `Make the keyword memorable and related to your concept`,
+                    `Tell them EXACTLY what they'll get when they take action`
+                ],
+                community: [
+                    `"Help me spread this message about ${concept}"`,
+                    `💡 IDEA: Make sharing feel like doing good, not self-promotion`,
+                    `Example for your concept: "Tag someone who needs to hear this"`,
+                    `Or: "Share this with [specific type of person] in your life"`,
+                    `Give them a reason WHY sharing helps others`
+                ],
+                authority: [
+                    `"This is just one insight about ${concept}"`,
+                    `💡 IDEA: Tease future content to build anticipation`,
+                    `Example for your concept: "Follow for more [your niche] tips like this"`,
+                    `Hint at what's coming next: "Tomorrow I'm sharing [related topic]"`,
+                    `Position yourself as their go-to source`
+                ]
             };
             return ctaPoints[cta] || [`End with clear next step`, `Simple CTA`, `Make it easy to act`];
         }
