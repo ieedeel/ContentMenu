@@ -114,11 +114,11 @@
 
             <div class="mb-6">
                 <label class="font-semibold text-gray-700 block mb-2">Your Content Concept</label>
-                <textarea id="concept" placeholder="Describe your content idea here..." class="w-full p-4 border rounded-lg h-24"></textarea>
+                <textarea id="concept" placeholder="Example: '3 mistakes I made as a beginner content creator that cost me 6 months of growth'" class="w-full p-4 border rounded-lg h-24"></textarea>
             </div>
 
-            <button onclick="generatePlan()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700">
-                Generate My Shooting Plan
+            <button onclick="generateStoryboard()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700">
+                Generate My Storyboard
             </button>
 
             <div id="result" class="mt-8 hidden"></div>
@@ -126,7 +126,9 @@
     </div>
 
     <script>
-        function generatePlan() {
+        let currentPlan = null;
+
+        function generateStoryboard() {
             const purpose = document.getElementById('purpose').value;
             const energy = document.getElementById('energy').value;
             const format = document.getElementById('format').value;
@@ -141,157 +143,372 @@
                 return;
             }
 
-            const plan = `
+            const frames = generateFrames(purpose, energy, format, hook, cta, concept);
+            
+            currentPlan = {
+                concept: concept,
+                selections: { purpose, energy, format, hook, cta, production, distribution },
+                frames: frames,
+                timestamp: new Date().toLocaleString()
+            };
+
+            displayStoryboard(frames, concept);
+        }
+
+        function generateFrames(purpose, energy, format, hook, cta, concept) {
+            const frames = [];
+            const isShort = format === 'short';
+            const frameCount = isShort ? 5 : 8;
+
+            // FRAME 1 - HOOK
+            frames.push({
+                number: 1,
+                duration: isShort ? '0-3 sec' : '0-5 sec',
+                title: 'HOOK',
+                shot: getHookShot(hook, energy),
+                talkingPoints: getHookTalkingPoints(hook, concept),
+                notes: 'This is your scroll-stopper. Make it count!'
+            });
+
+            // FRAMES 2-4 (or 2-6 for long-form) - BODY CONTENT
+            const bodyFrames = getBodyFrames(purpose, energy, concept, isShort);
+            bodyFrames.forEach((frame, index) => {
+                frames.push({
+                    number: 2 + index,
+                    duration: frame.duration,
+                    title: frame.title,
+                    shot: frame.shot,
+                    talkingPoints: frame.talkingPoints,
+                    notes: frame.notes
+                });
+            });
+
+            // FINAL FRAME - CTA
+            frames.push({
+                number: frameCount,
+                duration: isShort ? '3 sec' : '5-8 sec',
+                title: 'CLOSE & CTA',
+                shot: getClosingShot(energy, cta),
+                talkingPoints: getClosingTalkingPoints(cta, concept),
+                notes: 'End strong with clear action'
+            });
+
+            return frames;
+        }
+
+        function getHookShot(hook, energy) {
+            const hookShots = {
+                pattern: energy === 'monologue' ? 'Medium shot - do something unexpected (snap fingers, sudden movement, prop reveal)' : 'Wide shot - unusual action or visual surprise',
+                bold: energy === 'text' ? 'Bold text on screen with your concept' : 'Close-up - direct to camera with strong eye contact',
+                question: 'Medium shot with question text overlay OR direct question to camera',
+                pain: energy === 'pov' ? 'POV shot showing the frustrating situation' : 'Close-up showing frustration/struggle',
+                visual: 'Wide shot - eye-catching visual element dominates the frame',
+                stat: 'Close-up OR text overlay with big number/statistic',
+                story: 'Medium shot - already in the middle of action/scene'
+            };
+            return hookShots[hook] || 'Medium shot - strong opening visual';
+        }
+
+        function getHookTalkingPoints(hook, concept) {
+            const points = {
+                pattern: [`Start with action, not setup`, `No intro - jump right in`, `Example: [Dramatic action related to "${concept}"]`],
+                bold: [`State your bold claim immediately`, `Example: "Here's the truth about ${concept}"`, `No "Hey guys" - just the claim`],
+                question: [`Ask the question that relates to your concept`, `Example: "Want to know the biggest mistake in ${concept}?"`, `Make it relatable to your audience`],
+                pain: [`State the pain/problem upfront`, `Example: "If you're struggling with [problem in ${concept}]..."`, `Make them feel seen immediately`],
+                visual: [`Let the visual do the talking`, `Minimal or no talking in first 2 seconds`, `Visual tells the story`],
+                stat: [`Lead with the shocking number`, `Example: "95% of people get this wrong about ${concept}"`, `Number first, context second`],
+                story: [`Drop into the middle of the story`, `Example: "So there I was, completely messing up ${concept}..."`, `Create instant curiosity`]
+            };
+            return points[hook] || [`Strong opening statement`, `Hook them in 3 seconds`, `Related to: ${concept}`];
+        }
+
+        function getBodyFrames(purpose, energy, concept, isShort) {
+            const bodyFrames = [];
+            
+            if (purpose === 'education') {
+                bodyFrames.push({
+                    duration: isShort ? '3-6 sec' : '5-10 sec',
+                    title: 'POINT 1 - The Problem',
+                    shot: energy === 'screen' ? 'Screen recording showing the issue' : 'Medium shot - explaining the concept',
+                    talkingPoints: [`Break down what the problem is`, `Keep it simple and clear`, `Example: "Here's what most people don't understand about ${concept}"`],
+                    notes: 'Focus on ONE key concept'
+                });
+                bodyFrames.push({
+                    duration: isShort ? '4-7 sec' : '8-15 sec',
+                    title: 'POINT 2 - The Solution',
+                    shot: 'Close-up OR B-roll showing the solution',
+                    talkingPoints: [`Give them the answer/insight`, `Use an analogy if helpful`, `Example: "Think of it like [simple comparison]"`],
+                    notes: 'Make it actionable'
+                });
+                if (!isShort) {
+                    bodyFrames.push({
+                        duration: '10-15 sec',
+                        title: 'POINT 3 - Why It Matters',
+                        shot: 'Medium shot - direct to camera',
+                        talkingPoints: [`Connect it to their results`, `Show the impact`, `Example: "This is why it matters for ${concept}"`],
+                        notes: 'Emotional connection here'
+                    });
+                }
+            } else if (purpose === 'story') {
+                bodyFrames.push({
+                    duration: isShort ? '5-8 sec' : '8-12 sec',
+                    title: 'SETUP',
+                    shot: energy === 'pov' ? 'POV showing the scene' : 'Wide shot establishing the context',
+                    talkingPoints: [`Set the scene briefly`, `Who, what, when`, `Example: "I was trying to [action related to ${concept}]"`],
+                    notes: 'Keep setup BRIEF'
+                });
+                bodyFrames.push({
+                    duration: isShort ? '6-10 sec' : '10-18 sec',
+                    title: 'CONFLICT',
+                    shot: 'Close-up showing emotion OR action shots',
+                    talkingPoints: [`What went wrong`, `The challenge or mistake`, `Build tension`],
+                    notes: 'This is your drama moment'
+                });
+                if (!isShort) {
+                    bodyFrames.push({
+                        duration: '12-18 sec',
+                        title: 'RESOLUTION',
+                        shot: 'Medium shot - showing outcome',
+                        talkingPoints: [`How it turned out`, `What you learned`, `The payoff`],
+                        notes: 'Tie it back to your concept'
+                    });
+                }
+            } else if (purpose === 'tutorial') {
+                bodyFrames.push({
+                    duration: isShort ? '4-7 sec' : '6-10 sec',
+                    title: 'STEP 1',
+                    shot: energy === 'screen' ? 'Screen recording of step 1' : 'Close-up showing step 1',
+                    talkingPoints: [`"First, you need to [action]"`, `Show exactly what to do`, `Keep it crystal clear`],
+                    notes: 'One step only - no rushing'
+                });
+                bodyFrames.push({
+                    duration: isShort ? '4-7 sec' : '6-10 sec',
+                    title: 'STEP 2',
+                    shot: energy === 'screen' ? 'Screen recording of step 2' : 'Close-up showing step 2',
+                    talkingPoints: [`"Next, [action]"`, `Show the progression`, `Highlight any common mistakes to avoid`],
+                    notes: 'Build on previous step'
+                });
+                if (!isShort) {
+                    bodyFrames.push({
+                        duration: '6-10 sec',
+                        title: 'STEP 3',
+                        shot: 'Showing final step OR result',
+                        talkingPoints: [`"Finally, [action]"`, `Show the complete process`, `Quick tip or pro move`],
+                        notes: 'Lead into the result'
+                    });
+                }
+            } else if (purpose === 'proof') {
+                bodyFrames.push({
+                    duration: isShort ? '4-8 sec' : '6-12 sec',
+                    title: 'THE RESULT',
+                    shot: 'Close-up of proof (screenshot, before/after, data)',
+                    talkingPoints: [`Show the result upfront`, `Numbers, visuals, tangible proof`, `"Here's what happened..."`],
+                    notes: 'Make it undeniable'
+                });
+                bodyFrames.push({
+                    duration: isShort ? '5-8 sec' : '8-15 sec',
+                    title: 'THE CONTEXT',
+                    shot: 'Medium shot explaining',
+                    talkingPoints: [`Brief backstory`, `What you did to get this result`, `Key factor that made it work`],
+                    notes: 'Keep context tight'
+                });
+                if (!isShort) {
+                    bodyFrames.push({
+                        duration: '8-12 sec',
+                        title: 'THE INSIGHT',
+                        shot: 'Direct to camera',
+                        talkingPoints: [`What you learned`, `Why it worked`, `What others can learn from this`],
+                        notes: 'Value-add moment'
+                    });
+                }
+            } else {
+                // Generic body structure for other content types
+                bodyFrames.push({
+                    duration: isShort ? '5-10 sec' : '8-15 sec',
+                    title: 'MAIN POINT',
+                    shot: energy === 'monologue' ? 'Medium shot - talking to camera' : 'Mix of shots showing your point',
+                    talkingPoints: [`Your main insight about ${concept}`, `Support it with example or evidence`, `Make it relatable`],
+                    notes: 'This is your core message'
+                });
+                if (!isShort) {
+                    bodyFrames.push({
+                        duration: '10-15 sec',
+                        title: 'SUPPORTING POINT',
+                        shot: 'B-roll OR close-up',
+                        talkingPoints: [`Expand on your main idea`, `Give another angle or example`, `Build credibility`],
+                        notes: 'Reinforce your message'
+                    });
+                    bodyFrames.push({
+                        duration: '8-12 sec',
+                        title: 'WHY IT MATTERS',
+                        shot: 'Direct to camera',
+                        talkingPoints: [`Connect to their life/goals`, `Show the impact`, `Make it personal`],
+                        notes: 'Emotional resonance'
+                    });
+                }
+            }
+
+            return bodyFrames;
+        }
+
+        function getClosingShot(energy, cta) {
+            if (cta === 'conversion') {
+                return 'Close-up with text overlay showing link/keyword';
+            } else if (energy === 'monologue') {
+                return 'Medium shot - direct eye contact with camera';
+            } else if (energy === 'text') {
+                return 'Bold text CTA on screen';
+            }
+            return 'Medium shot with CTA text overlay';
+        }
+
+        function getClosingTalkingPoints(cta, concept) {
+            const ctaPoints = {
+                soft: [`"Save this for later if you found it helpful"`, `Optional: quick recap of main point`, `Keep it gentle - no pressure`],
+                engage: [`"Drop a comment with [specific question]"`, `"What's your experience with ${concept}?"`, `Invite conversation`],
+                conversion: [`"DM me [KEYWORD] for the full guide"`, `OR "Link in bio for more on ${concept}"`, `Clear, specific instruction`],
+                community: [`"Tag someone who needs to hear this"`, `"Share this with your [target audience]"`, `Make it about spreading value`],
+                authority: [`"Follow for more tips on ${concept}"`, `Position yourself as the expert`, `Hint at future content`]
+            };
+            return ctaPoints[cta] || [`End with clear next step`, `Simple CTA`, `Make it easy to act`];
+        }
+
+        function displayStoryboard(frames, concept) {
+            let html = `
                 <div class="border-t pt-8">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Your Shooting Plan</h2>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-gray-800">Your Storyboard</h2>
+                        <button onclick="exportStoryboard()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex items-center gap-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            Export as Text
+                        </button>
+                    </div>
                     
                     <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg mb-6">
-                        <h3 class="text-xl font-semibold mb-2">"${concept}"</h3>
-                        <p class="text-gray-700">Alright, let's break down how you're gonna shoot this!</p>
+                        <h3 class="text-xl font-semibold mb-2">📹 "${concept}"</h3>
+                        <p class="text-gray-700">Here's your frame-by-frame shooting guide. Follow this sequence when filming!</p>
                     </div>
 
                     <div class="space-y-6">
-                        <section class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-3">📹 Shot List</h3>
-                            <p><strong>Opening Shot (Hook):</strong> ${getHookDesc(hook)}</p>
-                            <p><strong>Main Sequence:</strong> ${getEnergyDesc(energy)}</p>
-                            <p><strong>Closing Shot:</strong> ${format === 'short' ? 'Quick payoff within 30 seconds max' : 'Clear resolution and CTA moment'}</p>
-                        </section>
+            `;
 
-                        <section class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-3">📝 Script Outline</h3>
-                            <p><strong>Hook (0-3 seconds):</strong> ${getHookDesc(hook)}</p>
-                            <p><strong>Body:</strong> ${getPurposeDesc(purpose)}</p>
-                            <p><strong>Close:</strong> ${getCTADesc(cta)}</p>
-                        </section>
+            frames.forEach(frame => {
+                html += `
+                    <div class="bg-white border-2 border-purple-200 rounded-lg p-6 hover:border-purple-400 transition">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
+                                    ${frame.number}
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-800">${frame.title}</h3>
+                                    <p class="text-sm text-gray-500">${frame.duration}</p>
+                                </div>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                                Frame ${frame.number}
+                            </span>
+                        </div>
 
-                        <section class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-3">✂️ Editing Notes</h3>
-                            ${getEditingNotes(production, format)}
-                        </section>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                                    </svg>
+                                    What to Shoot:
+                                </h4>
+                                <p class="text-gray-700">${frame.shot}</p>
+                            </div>
 
-                        <section class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-3">💬 Caption</h3>
-                            <p>${getCaptionStructure(purpose)}</p>
-                            <p class="mt-2">${getCTADesc(cta)}</p>
-                            <p class="mt-2"><strong>Hashtags:</strong> 3-5 relevant to your niche + trend</p>
-                        </section>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    What to Say:
+                                </h4>
+                                <ul class="space-y-1">
+                                    ${frame.talkingPoints.map(point => `<li class="text-gray-700">• ${point}</li>`).join('')}
+                                </ul>
+                            </div>
 
-                        <section class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-3">🚀 Posting Strategy</h3>
-                            ${getPostingStrategy(distribution, format)}
-                        </section>
+                            <div class="bg-yellow-50 p-3 rounded-lg border-l-4 border-yellow-400">
+                                <p class="text-sm text-gray-700"><strong>💡 Pro Tip:</strong> ${frame.notes}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
                     </div>
 
-                    <button onclick="exportPlan()" class="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-                        Export Plan as Text
-                    </button>
+                    <div class="mt-8 bg-green-50 border-2 border-green-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">✅ Ready to Shoot Checklist:</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Location/setup ready</span></li>
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Camera/phone charged and positioned</span></li>
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Lighting checked</span></li>
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Audio tested (if using voice)</span></li>
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Props/materials ready</span></li>
+                            <li class="flex items-center gap-2"><input type="checkbox" class="w-5 h-5"> <span>Storyboard reviewed</span></li>
+                        </ul>
+                    </div>
                 </div>
             `;
 
-            document.getElementById('result').innerHTML = plan;
+            document.getElementById('result').innerHTML = html;
             document.getElementById('result').classList.remove('hidden');
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function getHookDesc(hook) {
-            const hooks = {
-                pattern: 'Do something unexpected in frame 1',
-                bold: 'Text overlay or you stating your bold claim immediately',
-                question: 'On-screen text or verbal question that makes them stop scrolling',
-                pain: 'Show the relatable struggle or frustration right away',
-                visual: 'Eye-catching visual element front and center',
-                stat: 'Big number on screen or stated verbally with impact',
-                story: 'Jump right into the middle of action or drama'
-            };
-            return hooks[hook] || 'Strong opening';
-        }
+        function exportStoryboard() {
+            if (!currentPlan) return;
 
-        function getEnergyDesc(energy) {
-            const energies = {
-                pov: 'POV angles - keep camera at eye level, move naturally',
-                monologue: 'Direct to camera - find good lighting, eye contact with lens',
-                screen: 'Screen recording - clean desktop, close unnecessary tabs',
-                silent: 'Pure visual storytelling - focus on compelling imagery',
-                voice: 'Voice-over with supporting visuals',
-                text: 'Text overlays driving the narrative',
-                mixed: 'Mix of angles - wide, medium, close-up for variety'
-            };
-            return energies[energy] || 'Mix of angles for variety';
-        }
+            let text = `CONTENT STORYBOARD\n`;
+            text += `Generated: ${currentPlan.timestamp}\n`;
+            text += `${'='.repeat(70)}\n\n`;
+            text += `CONCEPT: ${currentPlan.concept}\n\n`;
+            text += `${'='.repeat(70)}\n\n`;
 
-        function getPurposeDesc(purpose) {
-            const purposes = {
-                education: 'Break down the concept → Give an example → Why it matters',
-                story: 'Setup the scene → Conflict/challenge → Resolution',
-                tutorial: 'Step 1 → Step 2 → Step 3',
-                proof: 'Show the result → Brief context → Key factor that made it work'
-            };
-            return purposes[purpose] || 'Main point → Supporting example → Why they should care';
-        }
+            currentPlan.frames.forEach(frame => {
+                text += `FRAME ${frame.number}: ${frame.title}\n`;
+                text += `Duration: ${frame.duration}\n`;
+                text += `${'-'.repeat(70)}\n\n`;
+                text += `WHAT TO SHOOT:\n${frame.shot}\n\n`;
+                text += `WHAT TO SAY:\n`;
+                frame.talkingPoints.forEach(point => {
+                    text += `• ${point}\n`;
+                });
+                text += `\nPRO TIP: ${frame.notes}\n\n`;
+                text += `${'='.repeat(70)}\n\n`;
+            });
 
-        function getCTADesc(cta) {
-            const ctas = {
-                soft: 'Save this for later or drop a 💭 if this resonated',
-                engage: 'Comment below with your thoughts or vote in the poll',
-                conversion: 'DM me or link in bio for more',
-                community: 'Tag someone who needs to see this',
-                authority: 'Follow for more insights like this'
-            };
-            return ctas[cta] || 'End with clear next step';
-        }
+            text += `READY TO SHOOT CHECKLIST:\n`;
+            text += `☐ Location/setup ready\n`;
+            text += `☐ Camera/phone charged and positioned\n`;
+            text += `☐ Lighting checked\n`;
+            text += `☐ Audio tested (if using voice)\n`;
+            text += `☐ Props/materials ready\n`;
+            text += `☐ Storyboard reviewed\n`;
 
-        function getEditingNotes(production, format) {
-            let notes = '';
-            if (production === 'raw') {
-                notes = '<p>Minimal editing needed - authenticity is key</p><p>Maybe just trim dead air at start/end</p>';
-            } else if (production === 'semi') {
-                notes = '<p>Cut out pauses and mistakes</p><p>Add simple text overlays for key points</p><p>Background music (low volume)</p>';
-            } else if (production === 'full') {
-                notes = '<p>Jump cuts to maintain pace</p><p>Text animations for emphasis</p><p>B-roll inserts</p><p>Sound effects where appropriate</p>';
-            }
-            if (format === 'short') {
-                notes += '<p>Keep total runtime under 30 seconds</p><p>Fast-paced cuts every 2-3 seconds</p>';
-            }
-            return notes;
-        }
-
-        function getCaptionStructure(purpose) {
-            if (purpose === 'myth') {
-                return '❌ Myth: [Common belief]<br>✅ Reality: [The truth]<br>[Brief explanation]';
-            } else if (purpose === 'tutorial') {
-                return 'Here\'s how to [achieve result]:<br>1. Step one<br>2. Step two<br>3. Step three';
-            }
-            return 'Hook line related to your concept<br>Main insight in 2-3 sentences';
-        }
-
-        function getPostingStrategy(distribution, format) {
-            let strategy = '<p><strong>Best Time:</strong> ';
-            if (distribution === 'reach') {
-                strategy += 'Peak hours (11am-1pm or 7pm-9pm)</p>';
-            } else {
-                strategy += 'When your core followers are most active</p>';
-            }
-            
-            strategy += '<p><strong>Platform:</strong> ';
-            if (format === 'short') {
-                strategy += 'Perfect for TikTok, Reels, Shorts - post to all 3</p>';
-            } else {
-                strategy += 'YouTube first, then cut highlights for shorts</p>';
-            }
-            
-            strategy += '<p><strong>Engagement:</strong> Reply to first 10 comments within the first hour</p>';
-            return strategy;
-        }
-
-        function exportPlan() {
-            const concept = document.getElementById('concept').value;
-            const resultText = document.getElementById('result').innerText;
-            const blob = new Blob([resultText], { type: 'text/plain' });
+            const blob = new Blob([text], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `content-plan-${Date.now()}.txt`;
+            a.download = `storyboard-${Date.now()}.txt`;
             a.click();
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
